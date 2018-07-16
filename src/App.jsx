@@ -26,6 +26,8 @@ class App extends Component {
     this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "UNDERLINE"));
 	}
 
+  _to
+
   _onLeftCenter(e) {
     e.preventDefault()
     this.onChange()
