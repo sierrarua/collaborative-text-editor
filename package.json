@@ -59,9 +59,7 @@
     "draft-js": "^0.10.5",
     "electron-compile": "^6.4.3",
     "electron-squirrel-startup": "^1.0.0",
-<<<<<<< HEAD
     "react-hot-loader": "^4.3.3"
-=======
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "material-ui": "^0.20.1",
@@ -73,7 +71,6 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "socket.io-client": "^2.1.1"
->>>>>>> 2cae1a0023f1be9e503a0cdf26b8cdca7270e1ad
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
