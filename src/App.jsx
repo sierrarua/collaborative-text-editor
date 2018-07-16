@@ -25,11 +25,28 @@ class App extends Component {
     this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "UNDERLINE"));
 	}
 
+  _onLeftCenter(e) {
+    e.preventDefault()
+    this.onChange()
+  }
+
+  _toggleBulletPoints(e) {
+    e.preventDefault()
+    this.onChange(RichUtils.toggleBlockType(this.state.editorState, 'unordered-list-item'));
+  }
+
+  _toggleNumberedList(e) {
+    e.preventDefault()
+    this.onChange(RichUtils.toggleBlockType(this.state.editorState, 'ordered-list-item'));
+  }
+
   render() {
-    return (<div>
+    return (<div style={{ border: '1px solid #ccc' }}>
       <button onMouseDown={(e) => this._onBoldClick(e)}>BOLD</button>
       <button onMouseDown={(e) => this._onItalicClick(e)}>Italic</button>
       <button onMouseDown={(e) => this._onUnderlineClick(e)}>Underline</button>
+      <button onMouseDown={(e) => this._toggleBulletPoints(e)}>Bullet List</button>
+      <button onMouseDown={(e) => this._toggleNumberedList(e)}>Numbered List</button>
       <Editor
         editorState={this.state.editorState}
         onChange={this.onChange}
