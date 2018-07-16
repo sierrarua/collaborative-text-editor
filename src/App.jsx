@@ -20,10 +20,16 @@ class App extends Component {
     this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'ITALIC'));
   }
 
+  _onUnderlineClick(e) {
+    e.preventDefault()
+    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "UNDERLINE"));
+	}
+
   render() {
     return (<div>
       <button onMouseDown={(e) => this._onBoldClick(e)}>BOLD</button>
       <button onMouseDown={(e) => this._onItalicClick(e)}>Italic</button>
+      <button onMouseDown={(e) => this._onUnderlineClick(e)}>Underline</button>
       <Editor
         editorState={this.state.editorState}
         onChange={this.onChange}
