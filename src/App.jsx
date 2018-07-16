@@ -18,7 +18,7 @@ class App extends Component {
   _onItalicClick(e) {
     e.preventDefault()
     this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, 'ITALIC'));
-  }
+  } 
 
   render() {
     return (<div>
