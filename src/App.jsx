@@ -42,7 +42,10 @@ class App extends Component {
   }
 
   render() {
-    return (<div style={{ border: '1px solid #ccc' }}>
+    return (
+
+      <div>
+      <div style={{ border: '1px solid #ccc' }}>
       <Button variant="contained" color="primary" onMouseDown={(e) => this._onBoldClick(e)}>BOLD</Button>
       <Button variant="contained" color="primary" onMouseDown={(e) => this._onItalicClick(e)}>Italic</Button>
       <Button variant="contained" color="primary" onMouseDown={(e) => this._onUnderlineClick(e)}>Underline</Button>
@@ -53,7 +56,14 @@ class App extends Component {
         onChange={this.onChange}
         spellCheck={true}
       />
-    </div>);
+    </div>
+
+    <div style={{ border: '1px solid #ccc' }}>
+    <Button> Save </Button>
+    </div>
+    </div>
+
+  );
   }
 }
 
