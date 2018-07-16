@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { browserHistory } from 'react-router';
+import Button from '@material-ui/core/Button';
 
 class App extends Component {
   constructor(props) {
@@ -42,14 +43,15 @@ class App extends Component {
 
   render() {
     return (<div style={{ border: '1px solid #ccc' }}>
-      <button onMouseDown={(e) => this._onBoldClick(e)}>BOLD</button>
-      <button onMouseDown={(e) => this._onItalicClick(e)}>Italic</button>
-      <button onMouseDown={(e) => this._onUnderlineClick(e)}>Underline</button>
-      <button onMouseDown={(e) => this._toggleBulletPoints(e)}>Bullet List</button>
-      <button onMouseDown={(e) => this._toggleNumberedList(e)}>Numbered List</button>
+      <Button variant="contained" color="primary" onMouseDown={(e) => this._onBoldClick(e)}>BOLD</Button>
+      <Button variant="contained" color="primary" onMouseDown={(e) => this._onItalicClick(e)}>Italic</Button>
+      <Button variant="contained" color="primary" onMouseDown={(e) => this._onUnderlineClick(e)}>Underline</Button>
+      <Button variant="contained" color="primary" onMouseDown={(e) => this._toggleBulletPoints(e)}>Bullet List</Button>
+      <Button variant="contained" color="primary" onMouseDown={(e) => this._toggleNumberedList(e)}>Numbered List</Button>
       <Editor
         editorState={this.state.editorState}
         onChange={this.onChange}
+        spellCheck={true}
       />
     </div>);
   }
