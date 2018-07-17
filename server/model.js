@@ -1,44 +1,45 @@
-var mongoose = require('mongoose');
-var Schema=mongoose.Schema;
-var ObjectId=mongoose.Schema.Types.ObjectId
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 if (!process.env.MLAB) {
   process.exit(1);
 }
 
-var connect = process.env.MLAB;
+const connect = process.env.MLAB;
 mongoose.connect(connect);
 
-var userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   username: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
 });
 
-var documentSchema = new mongoose.Schema({
+const documentSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   collaborators: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User'
-  }
-})
+    type: ObjectId,
+    ref: 'User',
+  },
+});
 
-var User = mongoose.model('User', userSchema);
-var Document = mongoose.model('Document', documentSchema);
+const User = mongoose.model('User', userSchema);
+const Document = mongoose.model('Document', documentSchema);
 
 module.exports = {
-  User: User,
-  Document: Document
+  User,
+  Document,
 };
