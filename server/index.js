@@ -82,7 +82,7 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/login', passport.authenticate('local'), (req, res) => {
-  console.log('LOGIN: ', req.user)
+  console.log('LOGIN: ', req.user.username);
   res.json({ success: true });
 });
 
@@ -95,15 +95,17 @@ app.post('/newDoc', (req, res) => {
     if (error) {
       console.log('error', error);
     } else {
-      res.send(results);
+      res.json({ success: true });
     }
   });
 });
 
-// app.post('/doc', (req, res) => {
-//
-//
-// });
+
+
+app.get('/doc',(req,res)=>{
+
+
+})
 
 server.listen(1337, '127.0.0.1');
 

@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 if (!process.env.MONGODB_URI) {
-  console.log('MONGODB_URI ')
   process.exit(1);
 }
 
