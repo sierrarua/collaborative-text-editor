@@ -56,8 +56,12 @@ const DocumentSchema = new Schema({
   },
   lastEditTime: {
     type: Date
+  },
+},
+  {
+    minimize: false
   }
-});
+);
 
 const User = mongoose.model('User', UserSchema);
 const Document = mongoose.model('Document', DocumentSchema);
