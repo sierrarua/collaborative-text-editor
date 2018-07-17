@@ -10,7 +10,7 @@ if (!process.env.MONGODB_URI) {
 const connect = process.env.MONGODB_URI;
 mongoose.connect(connect);
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -25,7 +25,23 @@ const userSchema = new Schema({
   },
 });
 
-const documentSchema = new Schema({
+const DocumentSchema = new Schema({
+  content : {
+    type: Array,
+    default: []
+  },
+  owner: {
+    type: ObjectId,
+    required: true,
+    ref: "users"
+  },
+  collaboratorList: {
+    type: [{
+      type: ObjectId,
+      ref: "users"
+    }],
+    default: [],
+  },
   title: {
     type: String,
     required: true,
@@ -34,17 +50,16 @@ const documentSchema = new Schema({
     type: String,
     required: true,
   },
-  collaborators: {
-    type: ObjectId,
-    ref: 'User',
+  createdTime: {
+    type: Date
   },
-  // {
-  //   minimize:false
-  // }
+  lastEditTime: {
+    type: Date
+  }
 });
 
-const User = mongoose.model('User', userSchema);
-const Document = mongoose.model('Document', documentSchema);
+const User = mongoose.model('User', UserSchema);
+const Document = mongoose.model('Document', DocumentSchema);
 
 export {
   User,
