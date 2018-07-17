@@ -1,4 +1,4 @@
-import http from 'http';
+// import http from 'http';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -6,17 +6,19 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import { User, Document } from './model';
 
+
+const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const session = require('cookie-session');
 
-const app = express();
-const connect = process.env.MLAB;
+
+const connect = process.env.MONGODB_URI;
 mongoose.connect(connect);
 
 // const Document = models.Document;
 const LocalStrategy = require('passport-local').Strategy;
-
+console.log('localstrateg');
 
 // set passport middleware to first try local strategy
 app.use(bodyParser.json());
@@ -37,7 +39,7 @@ passport.deserializeUser((id, done) => {
 // passport strategy
 passport.use(new LocalStrategy((username, password, done) => {
   // Find the user with the given username
-  User.findOne({ username: username }, (err, user) => {
+  User.findOne({ username }, (err, user) => {
     // if there's an error, finish trying to authenticate (auth failed)
     if (err) {
       console.log(err);
@@ -59,6 +61,9 @@ passport.use(new LocalStrategy((username, password, done) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/', (req, res) => {
+  res.json({ success: true });
+})
 
 app.post('/register', (req, res) => {
   const newUser = new User({
@@ -69,6 +74,7 @@ app.post('/register', (req, res) => {
   newUser.save({}, (error, results) => {
     if (error) {
       console.log('error', error);
+      res.json({ error });
     } else {
       res.send(results);
     }
@@ -94,14 +100,11 @@ app.post('/newDoc', (req, res) => {
   });
 });
 
-app.post('/doc', (req, res) => {
+// app.post('/doc', (req, res) => {
+//
+//
+// });
 
-
-});
-
-http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
+server.listen(1337, '127.0.0.1');
 
 console.log('Server running at http://127.0.0.1:1337/');
