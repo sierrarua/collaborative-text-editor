@@ -68,6 +68,9 @@ class User extends Component {
               placeholder='Title'
               onChange={e => this.setState({documentName: e.target.value})} />
           </FormControl>
+          <FormControl>
+           <Input id="newDoc" placeholder='Document Password' onChange={e => this.setState({password: e.target.value})} />
+         </FormControl>
           <Button variant="contained" color="primary">Create Document</Button>
         </div>
       </div>
