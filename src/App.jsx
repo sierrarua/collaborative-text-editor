@@ -1,26 +1,32 @@
-import React, {Component} from 'react';
-import Welcome from './screens/Welcome';
-import User from './screens/User';
-import TextEditor from './screens/TextEditor';
+import React, {Component} from 'react'
+import io from 'socket.io-client'
+import {
+  Login,
+  Connecting
+} from './screens'
 
-class App extends Component {
+export default class App extends Component {
+
   state = {
-    screen: Welcome
+    connecting: true,
+    screen: Login
   }
 
-  navigate = (screen) => {
-    this.setState({screen});
+  componentDidMount() {
+    this.socket = io('http://localhost:1337')
+    this.socket.on('connect', () => this.setState({connecting: null}))
+    this.socket.on('disconnect', () => this.setState({connecting: true}))
+  }
+
+  navigate = (screen, options) => {
+    this.setState({screen, options})
   }
 
   render() {
-    return (
-      <div>
-        {this.state.screen === Welcome ? <Welcome navigate={this.navigate} /> : null}
-        {this.state.screen === User ? <User navigate={this.navigate}/> : null}
-        {this.state.screen === TextEditor ? <TextEditor navigate={this.navigate}/> : null}
-      </div>
-    )
+    const {navigate, socket, state} = this
+
+    return React.createElement(
+      state.connecting ? Connecting : state.screen,
+      {socket, navigate, options: state.options})
   }
 }
-
-export default App;
