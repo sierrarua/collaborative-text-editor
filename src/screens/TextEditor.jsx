@@ -14,6 +14,9 @@ import FormatUnderlined from '@material-ui/icons/FormatUnderlined';
 import FormatListBulleted from '@material-ui/icons/FormatListBulleted';
 import FormatListNumbered from '@material-ui/icons/FormatListNumbered';
 import BorderColor from '@material-ui/icons/BorderColor';
+import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft';
+import FormatAlignCenter from '@material-ui/icons/FormatAlignCenter';
+import FormatAlignRight from '@material-ui/icons/FormatAlignRight';
 
 import Editor from "draft-js-plugins-editor"
 import createHighlightPlugin from '../plugins/highlightPlugin'
@@ -128,7 +131,7 @@ class TextEditor extends Component {
       }}>
       <IconButton variant="contained"
         onMouseDown={(e) => this._onBoldClick(e)}
-        backgroundColor={this.state.editorState.getCurrentInlineStyle().has(style) ? color.red700 : color.red400}>
+      >
         <FormatBold/>
       </IconButton>
       <IconButton variant="contained" onMouseDown={(e) => this._onItalicClick(e)}>
@@ -146,7 +149,10 @@ class TextEditor extends Component {
       <IconButton className="highlight" variant="contained" color="yellow" onMouseDown={(e) => this._onHighlight(e)}>
         <BorderColor/>
       </ IconButton>
+
+
       {FORMAT_BAR.map(({style, label}) => <button onClick={this.onToggleStyle(style)}>{label}</button>)}
+
       <select onChange={e => this.toggleFontSize(e.target.value)}>
         {options(['12px', '24px', '36px', '50px', '72px'])}
       </select>

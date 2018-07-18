@@ -5,7 +5,7 @@ import TextEditor from './screens/TextEditor';
 
 class App extends Component {
   state = {
-    screen: User
+    screen: Welcome
   }
 
   navigate = (screen) => {
