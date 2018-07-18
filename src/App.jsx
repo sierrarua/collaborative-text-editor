@@ -5,7 +5,7 @@ import TextEditor from './screens/TextEditor';
 
 class App extends Component {
   state = {
-    screen: TextEditor
+    screen: User
   }
 
   navigate = (screen) => {
@@ -15,9 +15,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.screen === Welcome ? <Welcome /> : null}
-        {this.state.screen === User ? <User /> : null}
-        {this.state.screen === TextEditor ? <TextEditor/> : null}
+        {this.state.screen === Welcome ? <Welcome navigate={this.navigate} /> : null}
+        {this.state.screen === User ? <User navigate={this.navigate}/> : null}
+        {this.state.screen === TextEditor ? <TextEditor navigate={this.navigate}/> : null}
       </div>
     )
   }
