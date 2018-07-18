@@ -126,7 +126,9 @@ class TextEditor extends Component {
     return (<div style={{
         border: '1px solid #ccc'
       }}>
-      <IconButton variant="contained" onMouseDown={(e) => this._onBoldClick(e)}>
+      <IconButton variant="contained"
+        onMouseDown={(e) => this._onBoldClick(e)}
+        backgroundColor={this.state.editorState.getCurrentInlineStyle().has(style) ? color.red700 : color.red400}>
         <FormatBold/>
       </IconButton>
       <IconButton variant="contained" onMouseDown={(e) => this._onItalicClick(e)}>

@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 if (!process.env.MONGODB_URI) {
-  console.log('MONGODB_URI ')
   process.exit(1);
 }
 
@@ -27,19 +26,19 @@ const UserSchema = new Schema({
 });
 
 const DocumentSchema = new Schema({
-  content : {
+  content: {
     type: Array,
-    default: []
+    default: [],
   },
   owner: {
     type: ObjectId,
     required: true,
-    ref: "users"
+    ref: 'users',
   },
   collaboratorList: {
     type: [{
       type: ObjectId,
-      ref: "users"
+      ref: 'users',
     }],
     default: [],
   },
@@ -52,7 +51,7 @@ const DocumentSchema = new Schema({
     required: true,
   },
   createdTime: {
-    type: Date
+    type: Date,
   },
   lastEditTime: {
     type: Date
