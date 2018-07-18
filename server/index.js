@@ -91,6 +91,7 @@ app.post('/newDoc/:userid', (req, res) => {
     title: req.body.title,
     password: req.body.password,
     collaboratorList: [req.params.userid],
+    createdTime: Date.now(),
   });
   newDoc.save({}, (error) => {
     if (error) {
