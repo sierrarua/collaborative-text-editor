@@ -26,19 +26,19 @@ const UserSchema = new Schema({
 });
 
 const DocumentSchema = new Schema({
-  content : {
+  content: {
     type: Array,
-    default: []
+    default: [],
   },
   owner: {
     type: ObjectId,
     required: true,
-    ref: "users"
+    ref: 'users',
   },
   collaboratorList: {
     type: [{
       type: ObjectId,
-      ref: "users"
+      ref: 'users',
     }],
     default: [],
   },
@@ -51,11 +51,11 @@ const DocumentSchema = new Schema({
     required: true,
   },
   createdTime: {
-    type: Date
+    type: Date,
   },
   lastEditTime: {
-    type: Date
-  }
+    type: Date,
+  },
 });
 
 const User = mongoose.model('User', UserSchema);

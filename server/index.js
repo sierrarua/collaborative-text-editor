@@ -36,7 +36,6 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-// passport strategy
 passport.use(new LocalStrategy((username, password, done) => {
   // Find the user with the given username
   User.findOne({ username }, (err, user) => {
@@ -86,26 +85,39 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
   res.json({ success: true });
 });
 
-app.post('/newDoc', (req, res) => {
+app.post('/newDoc/:userid', (req, res) => {
   const newDoc = new Document({
+    owner: req.params.userid,
     title: req.body.title,
-    password: req.body.password
+    password: req.body.password,
+    collaboratorList: [req.params.userid],
   });
-  newDoc.save({}, (error, results) => {
+  newDoc.save({}, (error) => {
     if (error) {
       console.log('error', error);
     } else {
-      res.json({ success: true });
+      User.findById(req.params.userid)
+      .then((user) => {
+        user.docLists.push(newDoc);
+        user.save();
+        console.log(user);
+        res.json({ success: true });
+      })
+      .catch((err) => {
+        console.log('ERROR in loading a doc: ', err)
+        res.json({ success: false })
+      })
     }
   });
 });
 
 
 
-app.get('/doc',(req,res)=>{
-
+app.get('/doc', (req, res) => {
+Document.findById(req.body.id)
 
 })
+
 
 server.listen(1337, '127.0.0.1');
 
