@@ -6,11 +6,15 @@ import {
 } from './screens'
 
 export default class App extends Component {
-
-  state = {
-    connecting: true,
-    screen: Login
+  constructor(props){
+    super(props);
+    this.state = {
+      connecting: true,
+      screen: Login
+    }
   }
+
+
 
   componentDidMount() {
     this.socket = io('http://localhost:1337')
