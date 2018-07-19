@@ -2,19 +2,32 @@ import React, { Component } from 'react'
 import {Document} from './index'
 
 export default class DocumentList extends Component {
-  state = {docs:[]}
+  constructor(props){
+    super(props);
+      this.state = {docs:[]}
+      this.loadDocuments = () => {
+        this.props.socket.emit('getDocuments', {}, (res) => {
+          if(res.err) return alert('Opps Error')
+          this.setState({ docs: res.docs })
+        })
+      }
 
-  loadDocuments = () => {
-    this.props.socket.emit('getDocuments', {}, (res) => {
-      if(res.err) return alert('Opps Error')
-      this.setState({ docs: res.docs })
-    })
+      this.refresh = (res) => {
+        if(res.err) return alert('Opps Error')
+        this.loadDocuments() //TODO: just update the state not a full reload
+      }
+
+      this.onChange = (field) => (e) => this.setState({[field]: e.target.value})
+      this.onCreate = () => this.props.socket.emit('createDocument', {name: this.state.docName}, this.refresh)
+      this.onJoin = () => this.props.socket.emit('addDocumentCollaborator', {docId: this.state.docId}, this.refresh)
+      this.deleteDoc = (docId) => () => this.props.socket.emit('deleteDocument', {docId}, this.refresh)
+      this.editDoc = (docId) => () => this.props.navigate(Document, {docId})
+
   }
 
-  refresh = (res) => {
-    if(res.err) return alert('Opps Error')
-    this.loadDocuments() //TODO: just update the state not a full reload
-  }
+
+
+
 
   componentDidMount() {
     this.intervalHandle = setInterval(this.loadDocuments, 2000)
@@ -25,11 +38,6 @@ export default class DocumentList extends Component {
     clearInterval(this.intervalHandle)
   }
 
-  onChange = (field) => (e) => this.setState({[field]: e.target.value})
-  onCreate = () => this.props.socket.emit('createDocument', {name: this.state.docName}, this.refresh)
-  onJoin = () => this.props.socket.emit('addDocumentCollaborator', {docId: this.state.docId}, this.refresh)
-  deleteDoc = (docId) => () => this.props.socket.emit('deleteDocument', {docId}, this.refresh)
-  editDoc = (docId) => () => this.props.navigate(Document, {docId})
 
   render() {
     return (<div>
