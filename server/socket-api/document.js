@@ -30,7 +30,6 @@ export default function document(socket) {
   })
 
   socket.on('saveDocument', (data, next) => {
-    // TODO: change to findOneAndUpdate
     Doc.findOne({
       _id: data.docId,
     }, (err, doc) => {
