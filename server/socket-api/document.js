@@ -34,14 +34,19 @@ export default function document(socket) {
       _id: data.docId,
     }, (err, doc) => {
       if(err) return next({err})
-      doc.rawState = data.rawState
+      doc.rawState = data.rawState;
+      doc.contents.push({
+        rawState: data.rawState,
+        time: new Date(),
+      });
+      doc.timeStamp = new Date();
+      console.log(doc.timeStamp);
       doc.save((err) => next({err}))
     })
   })
 
   socket.on('openDocument', (data, next) => {
     socket.join(data.docId)
-
     Doc.findOne({
       _id: data.docId,
     }, (err, doc) => next({err, doc}))
