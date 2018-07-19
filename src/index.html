@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>My Electron-React app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
-  <div id="content"></div>
+  <div id="App"></div>
 </body>
-<script src="http://localhost:1337/webpack-dev-server.js"></script>
-<script src="http://localhost:1337/built/bundle.js"></script>
-<script type="text/jsx">
-  import React from "react"; import { AppContainer } from "react-hot-loader"; import ReactDOM from "react-dom"; import App from "./App.jsx"; import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'; ReactDOM.render(
-  <AppContainer>
-    <MuiThemeProvider>
-      <App/>
-    </MuiThemeProvider>
-  </AppContainer>, document.getElementById('content') );
-</script>
 
+<script type="text/jsx">
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {AppContainer} from 'react-hot-loader';
+
+const render = () => {
+  const App = require('./app').default;
+  ReactDOM.render(<AppContainer><App /></AppContainer>, document.getElementById('App'));
+}
+
+render();
+if (module.hot) {
+  module.hot.accept(render);
+}
+</script>
 </html>
