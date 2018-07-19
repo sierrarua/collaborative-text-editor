@@ -23,7 +23,7 @@ export default class App extends Component {
     this.socket.on('disconnect', () => this.setState({connecting: true}))
   }
 
-  navigate (screen, options){
+  navigate =(screen, options) => {
     this.setState({screen, options})
   }
 
