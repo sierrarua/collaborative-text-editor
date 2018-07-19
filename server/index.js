@@ -115,10 +115,9 @@ app.post('/newDoc/:userid', (req, res) => {
 
 
 app.get('/doc', (req, res) => {
-Document.findById(req.body.id)
-
+  Document.findById(req.body.id)
 })
-
+;
 
 server.listen(1337, '127.0.0.1');
 
