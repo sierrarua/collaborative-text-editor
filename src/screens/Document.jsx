@@ -48,12 +48,16 @@ const FORMAT_BAR = [
 ]
 
 export default class Document extends Component {
-  state = {
-    // We need to create am empty editor state
-    // because draftJS state is complex!
-    editorState: EditorState.createEmpty(),
-    loading: true
+  constructor(props){
+    super(props);
+    this.state = {
+      // We need to create am empty editor state
+      // because draftJS state is complex!
+      editorState: EditorState.createEmpty(),
+      loading: true
+    }
   }
+
 
   componentDidMount() {
     const {socket, options} = this.props
