@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import createStyles from 'draft-js-custom-styles'
 import {DocumentList} from './index'
+import Search from 'react-search-box';
 import {
   Editor,
   EditorState,
@@ -154,7 +155,11 @@ export default class Document extends Component {
 
       <button onClick={this.onSave}>save</button>
       <button onClick={this.onExit}>exit</button>
-
+      <button onClick={this.onRevisionHistory}view revision history</button>
+      <div>
+        <Search htmlFor="Find in Document"></Search>
+        <button onClick={this.onRevisionHistory}Search</button>
+      </div>
       <div className="draft-editor-container">
         <Editor
           editorState={this.state.editorState}
